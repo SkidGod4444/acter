@@ -25,7 +25,7 @@ export default function Component() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   return (
-    <div className="flex h-screen items-center justify-center dark:bg-black dark:text-white bg-background text-black font-[family-name:var(--font-geist-regular)] overflow-hidden">
+    <div className="flex h-screen dark:bg-black dark:text-white bg-background text-black font-[family-name:var(--font-geist-regular)] overflow-hidden">
       {/* Sidebar */}
       {user && (
         <div
