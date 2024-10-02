@@ -1,16 +1,21 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '@/lib/auth/auth';
-import { User } from 'next-auth';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { auth } from "@/lib/auth/auth";
+import { User } from "next-auth";
 
 interface UserContextType {
   user: User | null;
   loading: boolean;
 }
 
-const UserContext = createContext<UserContextType>({ user: null, loading: true });
+const UserContext = createContext<UserContextType>({
+  user: null,
+  loading: true,
+});
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +25,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const session = await auth();
         setUser(session?.user || null);
       } catch (error) {
-        console.error('Error fetching user:', error);
+        console.error("Error fetching user:", error);
       } finally {
         setLoading(false);
       }
@@ -37,9 +42,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 };
 
 export const useUser = () => {
-    const context = useContext(UserContext);
-    if (context === undefined) {
-      throw new Error("useUser must be used within a UserProvider");
-    }
-    return context;
-  };
+  const context = useContext(UserContext);
+  if (context === undefined) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
+  return context;
+};

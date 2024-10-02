@@ -12,7 +12,7 @@ export const RoutesContext = ({
   protectedRoutes: string[];
   publicRoutes: string[];
 }) => {
-  const { user , loading } = useUser();
+  const { user, loading } = useUser();
   const router = useRouter();
   const path = usePathname();
 
