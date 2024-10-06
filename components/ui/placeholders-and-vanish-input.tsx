@@ -26,7 +26,7 @@ export function PlaceholdersAndVanishInput({
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   const startAnimation = () => {
     intervalRef.current = setInterval(() => {
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
@@ -66,21 +66,21 @@ export function PlaceholdersAndVanishInput({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-  
+
     canvas.width = 800;
     canvas.height = 800;
     ctx.clearRect(0, 0, 800, 800);
     const computedStyles = getComputedStyle(inputRef.current);
-  
+
     const fontSize = parseFloat(computedStyles.getPropertyValue("font-size"));
     ctx.font = `${fontSize * 2}px ${computedStyles.fontFamily}`;
     ctx.fillStyle = "#FFF";
     ctx.fillText(value, 16, 40);
-  
+
     const imageData = ctx.getImageData(0, 0, 800, 800);
     const pixelData = imageData.data;
     const newData: PixelData[] = [];
-  
+
     for (let t = 0; t < 800; t++) {
       const i = 4 * t * 800;
       for (let n = 0; n < 800; n++) {
@@ -99,10 +99,9 @@ export function PlaceholdersAndVanishInput({
         }
       }
     }
-  
+
     newDataRef.current = newData;
   }, [value]);
-  
 
   useEffect(() => {
     draw();

@@ -19,13 +19,21 @@ import { OsBtn } from "@/components/custom/os.button";
 import { OfcLinks } from "@/db/defaults";
 import { useUser } from "@/context/user.context";
 import DragableCards from "@/components/custom/hero/dragable.cards";
+import AuthDialog from "@/components/custom/auth/auth.dialog";
 
 export default function Component() {
   const { user } = useUser();
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleFormSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div className="relative h-screen z-50 flex flex-col dark:bg-black dark:text-white bg-background text-black font-[family-name:var(--font-geist-regular)] overflow-hidden">
+      
       {/* Background */}
       <div className="fixed inset-0 z-20 h-full w-full bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:3rem_3rem] dark:bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] dark:bg-[size:3rem_3rem]" />
 
@@ -76,12 +84,13 @@ export default function Component() {
         {/* Main Content */}
         <div className="flex flex-col flex-1 z-40">
           {/* Header at the top */}
-          <header className="flex justify-end items-center p-4">
-            <Badge>Public Beta</Badge>
+          <header className="flex justify-end items-center p-4 bg-transparent border-none">
+            {/* <Badge>Public Beta</Badge> */}
+            <AuthDialog open={isOpen} onOpenChange={setIsOpen}/>
           </header>
 
           <div className="mt-28 md:mt-10">
-          <OsBtn />
+            <OsBtn />
           </div>
           <main className="flex-1 flex flex-col items-center justify-center p-4">
             <h2 className="text-4xl mb-4 font-[family-name:var(--font-geist-bold)] tracking-tighter select-none">
@@ -93,7 +102,7 @@ export default function Component() {
 
             {/* Input area */}
             <div className="w-full max-w-3xl mb-10">
-              <div className="flex flex-col gap-2 bg-background border-black dark:bg-black rounded-xl border border-dashed dark:border-white p-2 min-h-[60px]">
+              <form onSubmit={handleFormSubmit} className="flex flex-col gap-2 bg-background border-black dark:bg-black rounded-xl border border-dashed dark:border-white p-2 min-h-[60px]">
                 <CustomTextArea
                   placeholder="Acter make me a bra for my huge buttons..."
                   className="flex-1 bg-transparent focus:outline-none shadow-none"
@@ -106,7 +115,7 @@ export default function Component() {
                     <ArrowUpIcon className="w-4 h-4" />
                   </Button>
                 </div>
-              </div>
+              </form>
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">

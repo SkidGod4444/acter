@@ -1,8 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  BoltIcon,
-  Sparkles,
-} from "lucide-react";
+import { BoltIcon, Sparkles } from "lucide-react";
 import React, { useState } from "react";
 import DraggableWrapper from "../dragable.wrapper";
 import { Card } from "@/components/ui/card";
@@ -41,9 +38,9 @@ export default function DragableCards() {
           left: -300,
         }}
       >
-           <Card className="p-4 shadow-xl">
-           <SwipeableStackCards />
-           </Card>
+        <Card className="p-4 shadow-xl">
+          <SwipeableStackCards />
+        </Card>
       </DraggableWrapper>
       <DraggableWrapper
         initial={{ top: -100, right: "15%", rotate: -10 }}
@@ -79,14 +76,14 @@ export default function DragableCards() {
         }}
       >
         <Card className="p-4 shadow-xl">
-        <CodeComparison
-      beforeCode={beforeCode}
-      afterCode={afterCode}
-      language="typescript"
-      filename="sumArrayComparison.ts"
-      lightTheme="github-light"
-      darkTheme="github-dark"
-    />
+          <CodeComparison
+            beforeCode={beforeCode}
+            afterCode={afterCode}
+            language="typescript"
+            filename="sumArrayComparison.ts"
+            lightTheme="github-light"
+            darkTheme="github-dark"
+          />
         </Card>
       </DraggableWrapper>
 
@@ -113,11 +110,13 @@ export default function DragableCards() {
           left: "10%",
         }}
       >
+        <div className="shadow-xl rounded-3xl">
         <PlaceholdersAndVanishInput
           placeholders={placeholders}
           onChange={handleChange}
           onSubmit={onSubmit}
         />
+        </div>
       </DraggableWrapper>
 
       <DraggableWrapper
@@ -132,14 +131,14 @@ export default function DragableCards() {
             <HeroVideoDialog
               className="dark:hidden block"
               animationStyle="from-center"
-              videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
+              videoSrc="https://firebasestorage.googleapis.com/v0/b/archives-63571.appspot.com/o/portfolio%2Ftestimonials%2Fboxchat-testimonial.mp4?alt=media&token=51be6968-e40f-4074-a0f7-026f98930671"
               thumbnailSrc="https://startup-template-sage.vercel.app/hero-light.png"
               thumbnailAlt="Hero Video"
             />
             <HeroVideoDialog
               className="hidden dark:block"
               animationStyle="from-center"
-              videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
+              videoSrc="https://firebasestorage.googleapis.com/v0/b/archives-63571.appspot.com/o/portfolio%2Ftestimonials%2Fboxchat-testimonial.mp4?alt=media&token=51be6968-e40f-4074-a0f7-026f98930671"
               thumbnailSrc="https://startup-template-sage.vercel.app/hero-dark.png"
               thumbnailAlt="Hero Video"
             />

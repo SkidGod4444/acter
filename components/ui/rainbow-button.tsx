@@ -2,7 +2,10 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-export function RainbowButton({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+export function RainbowButton({
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       className={cn(

@@ -16,9 +16,63 @@ model chats {
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model users {
-  xata_id        String   @unique(map: "_pgroll_new_users_xata_id_key") @default(dbgenerated("('rec_'::text || (xata_private.xid())::text)"))
+model user {
+  id             String    @id @default(cuid())
+  name           String?
+  email          String    @unique
+  emailVerified  DateTime?
+  image          String?
+  accounts       account[]
+  sessions       session[]
+  xata_id        String    @unique(map: "_pgroll_new_user_xata_id_key") @default(dbgenerated("('rec_'::text || (xata_private.xid())::text)"))
+  xata_version   Int       @default(0)
+  xata_createdat DateTime  @default(now()) @db.Timestamptz(6)
+  xata_updatedat DateTime  @default(now()) @db.Timestamptz(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  xata_version      Int      @default(0)
+  xata_createdat    DateTime @default(now()) @db.Timestamptz(6)
+  xata_updatedat    DateTime @default(now()) @db.Timestamptz(6)
+  xata_id           String   @unique(map: "_pgroll_new_account_xata_id_key") @default(dbgenerated("('rec_'::text || (xata_private.xid())::text)"))
+
+  @@id([provider, providerAccountId])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model session {
+  sessionToken   String   @unique
+  userId         String
+  expires        DateTime
+  user           user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  xata_updatedat DateTime @default(now()) @db.Timestamptz(6)
+  xata_id        String   @unique(map: "_pgroll_new_session_xata_id_key") @default(dbgenerated("('rec_'::text || (xata_private.xid())::text)"))
   xata_version   Int      @default(0)
   xata_createdat DateTime @default(now()) @db.Timestamptz(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model verificationToken {
+  identifier     String
+  token          String
+  expires        DateTime
+  xata_createdat DateTime @default(now()) @db.Timestamptz(6)
   xata_updatedat DateTime @default(now()) @db.Timestamptz(6)
+  xata_id        String   @unique(map: "_pgroll_new_verificationToken_xata_id_key") @default(dbgenerated("('rec_'::text || (xata_private.xid())::text)"))
+  xata_version   Int      @default(0)
+
+  @@id([identifier, token])
 }

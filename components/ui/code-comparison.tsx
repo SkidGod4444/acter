@@ -31,7 +31,7 @@ export default function CodeComparison({
 
     async function highlightCode() {
       // Dynamically import `shiki` and the `codeToHtml` function
-      const shiki = await import('shiki');
+      const shiki = await import("shiki");
       const { codeToHtml } = shiki;
 
       const before = await codeToHtml(beforeCode, {
@@ -73,7 +73,7 @@ export default function CodeComparison({
       );
     }
   };
-  
+
   return (
     <div className="mx-auto w-full max-w-5xl">
       <div className="relative w-full overflow-hidden rounded-xl border border-border">

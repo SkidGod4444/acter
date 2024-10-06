@@ -21,7 +21,7 @@ export const RoutesContext = ({
       const handleRedirect = async () => {
         if (user && publicRoutes.includes(path)) {
           await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for 0.1 seconds
-          router.replace("/");
+          router.replace("/chat");
         } else if (!user && protectedRoutes.includes(path)) {
           await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for 0.1 seconds
           router.replace("/");
