@@ -20,7 +20,7 @@ export default function MsgsWrapper({ msgs }: MsgsProps) {
   return (
     <div
       ref={containerRef}
-      className="flex max-h-[calc(100vh-3.5rem-7rem)] flex-1 flex-col overflow-y-auto"
+      className="flex max-h-[calc(100vh-3.5rem-7rem)] flex-1 flex-col overflow-x-auto overflow-y-auto"
     >
       {msgs.map((message, i) => (
         <Message

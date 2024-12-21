@@ -1,7 +1,10 @@
+"use client";
+
 import { cn } from "@/lib/utils";
-import { Bot, CheckCheck } from "lucide-react";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
+import React, { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { ClipboardIcon } from "lucide-react";
 
 interface MsgProps {
   content: string;
@@ -9,6 +12,55 @@ interface MsgProps {
 }
 
 export default function Message({ content, isUser }: MsgProps) {
+  const [copyStatus, setCopyStatus] = useState<string | null>(null);
+
+  const renderMessageContent = (content: string) => {
+    const parts = content.split(/(```[\s\S]*?```)/g);
+    return (
+      <>
+        {parts.map((part, index) => {
+          if (
+            (part.startsWith("```") && part.endsWith("```")) ||
+            part.startsWith("```")
+          ) {
+            const [...codeLines] = part.split("\n");
+            const code = codeLines.slice(0, -1).join("\n");
+
+            return (
+              <div key={index} className="relative w-full">
+                <pre className="bg-gray-800 text-white p-4 rounded-md my-2 overflow-x-auto">
+                  <code>{code}</code>
+                </pre>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute top-2 right-2"
+                  onClick={() => handleCopy(code)}
+                >
+                  <ClipboardIcon className="w-4 h-4" />
+                </Button>
+                {copyStatus && (
+                  <span className="absolute top-2 left-2 text-sm text-green-500">
+                    {copyStatus}
+                  </span>
+                )}
+              </div>
+            );
+          } else {
+            return <p key={index}>{part}</p>;
+          }
+        })}
+      </>
+    );
+  };
+
+  const handleCopy = (code: string) => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopyStatus("Copied!");
+      setTimeout(() => setCopyStatus(null), 2000);
+    });
+  };
+
   return (
     <div className="bg-transparent py-5">
       <div className="px-6 py-2">
@@ -24,7 +76,10 @@ export default function Message({ content, isUser }: MsgProps) {
                 "size-10 shrink-0 aspect-square rounded-full border border-zinc-700 bg-zinc-900 flex justify-center items-center cursor-pointer",
               )}
             >
-              <Bot className="size-5 text-white" />
+              <Avatar>
+                <AvatarImage src="/assets/acter-logo.jpg" alt="@acter" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
             </div>
           )}
 
@@ -41,24 +96,19 @@ export default function Message({ content, isUser }: MsgProps) {
               })}
             >
               <span className="text-lg font-bold text-gray-900 dark:text-white">
-                {!isUser && "x0-GPT"}
+                {!isUser && "Acter"}
               </span>
-              {!isUser && (
-                <Badge className=" cursor-pointer">
-                  <CheckCheck className="size-4 mr-1" />
-                  Bot
-                </Badge>
-              )}
             </div>
 
-            <p
+            <div
               className={cn(
-                "text-md font-normal text-gray-900 dark:text-white px-4 py-2",
-                { "bg-[#2F2F2F] rounded-md mt-2 ": isUser },
+                "text-md font-normal text-gray-900 dark:text-white px-3 py-2",
+                { "rounded-xl mt-2 bg-muted": isUser },
               )}
             >
-              {content}
-            </p>
+              {/* Render MDX-like content */}
+              <div>{renderMessageContent(content)}</div>
+            </div>
           </div>
         </div>
       </div>

@@ -11,6 +11,9 @@ export async function GET() {
     }
   } catch (error) {
     console.error("Error in fetching session:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

@@ -3,15 +3,17 @@ import { aiUseChatAdapter } from "@upstash/rag-chat/nextjs";
 import { ragChat } from "@/lib/rag";
 
 export const POST = async (req: NextRequest) => {
-  const { messages } = await req.json();
-
+  const { messages, namespace, chatId } = await req.json();
+  const disableRAG = !namespace;
   const lastMsg = messages[messages.length - 1].content;
   const res = await ragChat.chat(lastMsg, {
-    namespace: "acter-db",
+    namespace: namespace,
     streaming: true,
+    sessionId: chatId,
     historyLength: 100,
     historyTTL: 604_800,
     similarityThreshold: 0.7,
+    disableRAG: disableRAG,
   });
 
   return aiUseChatAdapter(res);

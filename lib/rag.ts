@@ -1,12 +1,14 @@
 import { ragConfig } from "@/db/defaults";
 import { RAGChat, togetherai } from "@upstash/rag-chat";
+import { redisDB } from "./redis";
 
 export const ragChat = new RAGChat({
   model: togetherai(ragConfig.model, { apiKey: process.env.RAG_API_KEY }),
+  redis: redisDB,
   promptFn: ({ context, question, chatHistory }) =>
     `You are Acter, an AI assistant created by Saidev Dhal.
      Your task is to generate complete, high-quality code solutions based on the user's question or prompt.
-     Use the provided context and chat history to craft the code.
+     Use the provided context and chat history to craft the code and reply everything in MDX format.
      Ensure that the generated code incorporates and appropriately uses the components and styles mentioned in the context and explain all the details related to that component.
      Only create new code without using any component from the context if it is absolutely necessary, and be sure to explain why.
      If you lack sufficient information in the context or chat history, politely suggest the user provide additional details.
@@ -20,7 +22,7 @@ export const ragChat = new RAGChat({
      Question:
      ${question}
      ------
-     Full Code:`,
+     Full Code in MDX format:`,
 });
 
 async function AddTXTContext(data: string) {
@@ -42,4 +44,4 @@ async function AddWEBContext(src: string) {
   return true;
 }
 
-export { AddTXTContext, AddWEBContext }
+export { AddTXTContext, AddWEBContext };

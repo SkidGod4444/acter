@@ -1,13 +1,9 @@
-import {
-  PlusIcon,
-  BookOpenIcon,
-  LayoutDashboardIcon,
-} from "lucide-react";
+import { PlusIcon, BookOpenIcon, LayoutDashboardIcon } from "lucide-react";
 
 export const ragConfig = {
   baseUrl: "https://api.deepseek.com",
   model: "deepseek-ai/deepseek-llm-67b-chat",
-}
+};
 
 export const OfcLinks = {
   github: "https://l.devwtf.in/discord",
@@ -15,20 +11,25 @@ export const OfcLinks = {
   instagram: "https://dub.sh/saidev-instagram",
   sponsor: "https://github.com/sponsors/SkidGod4444",
   portfolio: "http://devwtf.in",
-  discord: "https://l.devwtf.in/discord"
+  discord: "https://l.devwtf.in/discord",
 };
 
 export const menuItems = [
   { label: "New Chat", icon: PlusIcon, href: "/chat", disabled: false },
   { label: "Docs", icon: BookOpenIcon, href: "/docs", disabled: true },
-  { label: "Dashboard", icon: LayoutDashboardIcon, href: "/dashboard", disabled: true },
+  {
+    label: "Dashboard",
+    icon: LayoutDashboardIcon,
+    href: "/dashboard",
+    disabled: true,
+  },
 ];
 
 export const DATA = {
   name: "Acter",
   url: "https://acter.devwtf.in",
   description: "",
-  prevImage: "https://i.imgur.com/JwDi96s.png"
+  prevImage: "https://i.imgur.com/JwDi96s.png",
 };
 
 export const beforeCode = `function sumArrayTraditional(arr: number[]): number {

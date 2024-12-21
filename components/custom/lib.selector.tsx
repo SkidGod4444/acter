@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,12 +12,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 const frameworks = [
   {
@@ -31,21 +31,19 @@ const frameworks = [
   {
     value: "default-ui",
     label: "Default UI",
-  }
-]
+  },
+];
 
 interface SpaceCompProps {
-    onSpaceSelect?: (selectedSpaceId: string | null) => void;
-    }
+  onSpaceSelect?: (selectedSpaceId: string | null) => void;
+}
 
 export function LibSelector({ onSpaceSelect }: SpaceCompProps) {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("default-ui")
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("default-ui");
 
   React.useEffect(() => {
-    if (onSpaceSelect) {
-      onSpaceSelect(value);
-    }
+    onSpaceSelect?.(value);
   }, [value, onSpaceSelect]);
 
   return (
@@ -74,14 +72,14 @@ export function LibSelector({ onSpaceSelect }: SpaceCompProps) {
                   key={framework.value}
                   value={framework.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
+                    setValue(currentValue === value ? "" : currentValue);
+                    setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === framework.value ? "opacity-100" : "opacity-0",
                     )}
                   />
                   {framework.label}
@@ -92,5 +90,5 @@ export function LibSelector({ onSpaceSelect }: SpaceCompProps) {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

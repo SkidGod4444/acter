@@ -1,6 +1,12 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { User } from "next-auth"; 
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { User } from "next-auth";
 
 interface UserContextType {
   user: User | null;
@@ -12,7 +18,9 @@ const UserContext = createContext<UserContextType>({
   loading: true,
 });
 
-export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 

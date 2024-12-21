@@ -111,11 +111,11 @@ export default function DragableCards() {
         }}
       >
         <div className="shadow-xl rounded-3xl">
-        <PlaceholdersAndVanishInput
-          placeholders={placeholders}
-          onChange={handleChange}
-          onSubmit={onSubmit}
-        />
+          <PlaceholdersAndVanishInput
+            placeholders={placeholders}
+            onChange={handleChange}
+            onSubmit={onSubmit}
+          />
         </div>
       </DraggableWrapper>
 
