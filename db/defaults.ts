@@ -1,3 +1,14 @@
+import {
+  PlusIcon,
+  BookOpenIcon,
+  LayoutDashboardIcon,
+} from "lucide-react";
+
+export const ragConfig = {
+  baseUrl: "https://api.deepseek.com",
+  model: "deepseek-ai/deepseek-llm-67b-chat",
+}
+
 export const OfcLinks = {
   github: "https://l.devwtf.in/discord",
   twitter: "https://x.com/SaidevDhal",
@@ -6,6 +17,12 @@ export const OfcLinks = {
   portfolio: "http://devwtf.in",
   discord: "https://l.devwtf.in/discord"
 };
+
+export const menuItems = [
+  { label: "New Chat", icon: PlusIcon, href: "/chat", disabled: false },
+  { label: "Docs", icon: BookOpenIcon, href: "/docs", disabled: true },
+  { label: "Dashboard", icon: LayoutDashboardIcon, href: "/dashboard", disabled: true },
+];
 
 export const DATA = {
   name: "Acter",

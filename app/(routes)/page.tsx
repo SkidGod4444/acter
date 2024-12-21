@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
-  MenuIcon,
-  PlusIcon,
-  BookOpenIcon,
-  LayoutDashboardIcon,
-  ChevronLeftIcon,
   PaperclipIcon,
   ArrowUpIcon,
   MoveUpRight,
@@ -17,13 +11,11 @@ import { CustomTextArea } from "@/components/custom/text.area";
 import { Badge } from "@/components/ui/badge";
 import { OsBtn } from "@/components/custom/os.button";
 import { OfcLinks } from "@/db/defaults";
-import { useUser } from "@/context/user.context";
 import DragableCards from "@/components/custom/hero/dragable.cards";
 import AuthDialog from "@/components/custom/auth/auth.dialog";
+import { LibSelector } from "@/components/custom/lib.selector";
 
-export default function Component() {
-  const { user } = useUser();
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+export default function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFormSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
@@ -39,48 +31,6 @@ export default function Component() {
 
       {/* Main Layout */}
       <div className="flex h-full w-full z-30">
-        {/* Sidebar */}
-        {user && (
-          <div
-            className={cn(
-              "hidden md:flex flex-col transition-all duration-300 border-r",
-              isSidebarExpanded ? "w-60" : "w-12",
-            )}
-          >
-            <div className="flex items-center justify-between p-2">
-              <span
-                className={cn(
-                  "text-2xl font-bold",
-                  !isSidebarExpanded && "hidden",
-                )}
-              >
-                Acter
-              </span>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsSidebarExpanded(!isSidebarExpanded)}
-              >
-                {isSidebarExpanded ? <ChevronLeftIcon /> : <MenuIcon />}
-              </Button>
-            </div>
-            <nav className="flex flex-col gap-2 p-4">
-              <Button variant="ghost" className="justify-start">
-                <PlusIcon className="mr-2" />
-                {isSidebarExpanded && "New Chat"}
-              </Button>
-              <Button variant="ghost" className="justify-start">
-                <BookOpenIcon className="mr-2" />
-                {isSidebarExpanded && "Docs"}
-              </Button>
-              <Button variant="ghost" className="justify-start">
-                <LayoutDashboardIcon className="mr-2" />
-                {isSidebarExpanded && "Dashboard"}
-              </Button>
-            </nav>
-          </div>
-        )}
-
         {/* Main Content */}
         <div className="flex flex-col flex-1 z-40">
           {/* Header at the top */}
@@ -94,23 +44,26 @@ export default function Component() {
           </div>
           <main className="flex-1 flex flex-col items-center justify-center p-4">
             <h2 className="text-4xl mb-4 font-[family-name:var(--font-geist-bold)] tracking-tighter select-none">
-              What can I help you ship?
+              Need awesome components to ship?
             </h2>
             <p className="text-sm mb-4 select-none dark:text-white text-muted-foreground">
-              Am the one who supports Acternity UI, ask questions, debug code.
+              Am the one who supports Acternity UI, Magic UI and more libraries. Ask questions, modify component.
             </p>
 
             {/* Input area */}
             <div className="w-full max-w-3xl mb-10">
-              <form onSubmit={handleFormSubmit} className="flex flex-col gap-2 bg-background border-black dark:bg-black rounded-xl border border-dashed dark:border-white p-2 min-h-[60px]">
+              <form onSubmit={handleFormSubmit} className="flex flex-col gap-2 bg-background dark:bg-black rounded-xl border dark:border-white p-2 min-h-[60px]">
                 <CustomTextArea
-                  placeholder="Acter make me a bra for my huge buttons..."
+                  placeholder="Acter make me a glowing button component..."
                   className="flex-1 bg-transparent focus:outline-none shadow-none"
                 />
                 <div className="flex items-center justify-between gap-2">
-                  <Button variant="ghost" size="icon">
-                    <PaperclipIcon className="w-4 h-4" />
-                  </Button>
+                <div className='flex items-center gap-2 flex-row'>
+            <Button variant="outline" size="icon" disabled>
+              <PaperclipIcon className="w-4 h-4" />
+            </Button>
+              <LibSelector  />
+            </div>
                   <Button size="icon">
                     <ArrowUpIcon className="w-4 h-4" />
                   </Button>

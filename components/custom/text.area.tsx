@@ -17,7 +17,7 @@ const CustomTextArea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         const minHeight = 20; // Default height
 
         // Reset the height to minHeight if there's no content
-        if (textarea.value.trim() === "" || null || undefined) {
+        if (textarea.value.trim() === "") {
           textarea.style.height = `${minHeight}px`;
           textarea.style.overflowY = "hidden";
         } else {
